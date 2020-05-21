@@ -7,6 +7,7 @@ if no, install one, or contact your manager
 2. install a miniconda3 and create a environment:
 ```
 conda create -n py3_geo python=3
+conda activate py3_geo
 ```
 3. install requirements
 ```
