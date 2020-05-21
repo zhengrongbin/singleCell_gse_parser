@@ -1,3 +1,7 @@
+"""
+author: Rongbin Zheng
+date: 2020-05
+"""
 import os,sys
 import json, re, time
 import urllib.request, urllib.parse, urllib.error
