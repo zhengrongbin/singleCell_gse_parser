@@ -321,7 +321,7 @@ def getLocalGeo(fsave, fill_or_not=False, xmlPath="geo_gse", DataType=False, ref
     # need_added_samples = sorted(list(local_repo_samples - local_db_samples))
     for gseid in local_repo_samples:
         print(gseid)
-        getType = getGEOSamples_byType_gse.getGeoSamples_byTypes(path = "repository_samples.pickle", datatype = ['sc-rna-seq', 'sc-atac-seq'], gseids=[gseid], refresh=refresh)
+        getType = getGEOSamples_byType_gse.getGeoSamples_byTypes(path = "repository_samples.pickle", datatype = ['sc-rna-seq', 'sc-atac-seq'], ddir=xmlPath, gseids=[gseid], refresh=refresh)
         if getType:
             for i in getType.keys():
                 # parse sample annotation
