@@ -2,7 +2,7 @@
 single cell data parser from GEO 
 
 **Clone the repository and do as follow:**
-1. make sure that MySQL is isntalled in your device, and you have the account to create a new database,   
+1. make sure that MySQL is installed in your device, and you have the account to create a new database,   
 if no, install one, or contact your manager
 2. install a miniconda3, then create a environment by doing:
 ```
