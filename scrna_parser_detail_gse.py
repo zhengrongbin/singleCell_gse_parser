@@ -12,7 +12,6 @@ import traceback
 from datetime import datetime
 import time
 import pickle
-import pickle
 import subprocess
 try:
     import xml.etree.cElementTree as ET
@@ -37,6 +36,23 @@ import pubmed
 import getGEOSamples_byType_gse
 import scrna_parser_from_gse  
 
+def search_cellline_from_out(description_dict, a_field):
+#    """last step, search cell line name from the outside resource
+ #   which contains more 50K cell lines get from web
+#    """
+    import pickle, re
+    f_search = file('./pickle_file/search_cellline.pk', 'rb')
+    database_search = pickle.load(f_search)
+    f_search.close()
+    tmp = None
+    for i in database_search:
+        if (')' not in i) and ('(' not in i):
+            ii = ''.join([x for x in str(i) if x != "[" and x != '+' and x != ']'])
+            cellline_pattern = re.compile(r' %s '%ii, re.I)
+            m = cellline_pattern.findall(' '+description_dict[a_field]+' ')
+            if m:
+                return database_search[i]
+    return None
 
 def _parse_a_field(description_dict, a_field, DCmodel, max_create_length=100, new=False):
     if  not description_dict.get(a_field, None):
@@ -92,7 +108,7 @@ def _parse_fields(description_dict, strict_fields, greedy_fields, DCmodel, greed
         return ret
 
     if DCmodel in [models.CellLines]: # search cell line by pubic database information
-        ret = geo_parser_newVersion.search_cellline_from_out(characteristics, 'characteristics')
+        ret = search_cellline_from_out(characteristics, 'characteristics')
         if ret:
             if ret and (str(ret) not in ['OF', 'IP']):
                 return ret
